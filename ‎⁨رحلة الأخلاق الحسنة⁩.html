@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>رحلة الأخلاق الحسنة</title>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f3f7f4; --ink:#14332b; --muted:#5d7a70; --surface:#fff; --ring:#9bbfb3; --soft:#d9ece5;
+  --gold:#c99a2e; --ok:#1e8e4e; --bad:#c0392b; --on:#fff;
+  --c1:#1f6f5c; --c2:#2b7fa6; --c3:#8a5fb5; --c4:#d17a2a;
+  box-sizing:border-box; padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0f1f1b; --ink:#e6f2ee; --muted:#9bb8ae; --surface:#16302a; --ring:#3f6c5f; --soft:#1d3a32;
+  --gold:#e2b44a; --ok:#4cd388; --bad:#ff7a6b; --on:#08231c;
+  --c1:#4fb89d; --c2:#5db4dd; --c3:#b894e0; --c4:#f0a352;}}
+:root[data-theme="dark"]{
+  --bg:#0f1f1b; --ink:#e6f2ee; --muted:#9bb8ae; --surface:#16302a; --ring:#3f6c5f; --soft:#1d3a32;
+  --gold:#e2b44a; --ok:#4cd388; --bad:#ff7a6b; --on:#08231c;
+  --c1:#4fb89d; --c2:#5db4dd; --c3:#b894e0; --c4:#f0a352;}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Tajawal",Tahoma,"Segoe UI",sans-serif;min-height:100vh;display:flex;justify-content:center;padding:24px 16px}
+main{width:100%;max-width:480px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:22px}
+h1{font-size:1.55rem;line-height:1.5;margin:6px 0 0;font-weight:800}
+p.sub{margin:0;color:var(--muted)}
+button{font:inherit;font-weight:700;background:transparent;border:2px solid var(--c1);color:var(--c1);padding:10px 28px;border-radius:999px;cursor:pointer}
+button.solid{background:var(--c1);color:var(--on)}
+button:focus-visible,.chip:focus-visible,.node:focus-visible,#core:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
+[hidden]{display:none!important}
+
+/* home */
+#cluster{position:relative;width:min(88vw,380px);aspect-ratio:1;margin-top:8px}
+.node{position:absolute;width:50%;height:50%;border-radius:50%;border:0;padding:0;display:flex;align-items:center;justify-content:center;font-size:1.35rem;font-weight:800;color:var(--on);background:var(--c);cursor:pointer;transition:transform .2s,opacity .2s}
+.node:hover:not(:disabled){transform:scale(1.03)}
+.node:disabled{opacity:.35;cursor:not-allowed}
+.node .hid{font-size:2.4rem;letter-spacing:.1em}
+.node.done{box-shadow:inset 0 0 0 5px rgba(255,255,255,.35)}
+#n1{top:0;right:0;--c:var(--c1)} #n2{top:0;left:0;--c:var(--c2)}
+#n3{bottom:0;right:0;--c:var(--c3)} #n4{bottom:0;left:0;--c:var(--c4)}
+#core{position:absolute;top:50%;left:50%;width:36%;height:36%;transform:translate(-50%,-50%);border-radius:50%;background:var(--surface);border:4px solid var(--bg);box-shadow:0 0 0 3px var(--ring);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:1.05rem;line-height:1.4;color:var(--muted);padding:0;cursor:default;z-index:2;transition:background .6s,color .6s,box-shadow .6s}
+#core.full{background:var(--gold);color:#1b1500;box-shadow:0 0 0 3px var(--gold),0 0 30px var(--gold);cursor:pointer;animation:glow 2s ease-in-out infinite}
+@keyframes glow{50%{box-shadow:0 0 0 3px var(--gold),0 0 46px var(--gold)}}
+#prog{color:var(--muted);font-weight:700}
+
+/* quiz */
+.top{width:100%;display:flex;justify-content:space-between;align-items:center;color:var(--muted);font-weight:700}
+.top button{padding:6px 16px;font-size:.95rem}
+#q{font-size:1.45rem;line-height:1.6;margin:0}
+#target{width:min(58vw,210px);aspect-ratio:1;border-radius:50%;border:4px dashed var(--ring);background:var(--surface);display:flex;align-items:center;justify-content:center;font-size:1.5rem;font-weight:800;color:var(--muted);transition:.2s;position:relative;padding:8px}
+#target.over{border-color:var(--gold);background:var(--soft);transform:scale(1.04)}
+#target.ok{border:4px solid var(--ok);color:var(--ok);animation:pop .5s}
+#target.bad{border:4px solid var(--bad);color:var(--bad);animation:shake .4s}
+#target.ok::after{content:"";position:absolute;inset:-4px;border-radius:50%;border:4px solid var(--ok);animation:ring 1s ease-out forwards}
+@keyframes pop{40%{transform:scale(1.15)}}
+@keyframes shake{25%{transform:translateX(-10px)}75%{transform:translateX(10px)}}
+@keyframes ring{to{transform:scale(1.7);opacity:0}}
+#bank{display:flex;gap:10px;justify-content:center;min-height:98px;width:100%}
+.chip{width:96px;height:96px;border-radius:50%;background:var(--c1);color:var(--on);display:flex;align-items:center;justify-content:center;text-align:center;padding:6px;font-weight:800;font-size:.95rem;line-height:1.3;cursor:grab;user-select:none;touch-action:none;box-shadow:0 3px 0 rgba(0,0,0,.18)}
+.chip.drag{position:fixed;z-index:50;pointer-events:none;opacity:.92}
+.chip.ghost{visibility:hidden}
+#msg{min-height:2.2em;font-size:1.25rem;font-weight:800}
+#msg.ok{color:var(--ok)} #msg.bad{color:var(--bad)}
+.bit{position:fixed;z-index:60;pointer-events:none;width:10px;height:14px;border-radius:2px;animation:fly 1.3s ease-out forwards}
+@keyframes fly{to{transform:translate(var(--x),var(--y)) rotate(var(--r));opacity:0}}
+@media (prefers-reduced-motion:reduce){.bit{display:none}#core.full,#target.ok,#target.bad{animation:none}}
+</style>
+</head>
+<body>
+<main>
+  <section id="home" style="display:contents">
+    <h1>رحلة الأخلاق الحسنة</h1>
+    <p class="sub">اضغط على الدائرة وأجب عن الأسئلة لتكشف الكلمة</p>
+    <div id="cluster">
+      <button class="node" id="n1"></button><button class="node" id="n2"></button>
+      <button class="node" id="n3"></button><button class="node" id="n4"></button>
+      <button id="core" aria-label="الدائرة الوسطى">؟</button>
+    </div>
+    <div id="prog"></div>
+  </section>
+
+  <section id="quiz" style="display:contents" hidden>
+    <div class="top"><button id="back">الرئيسية</button><span id="count"></span></div>
+    <h2 id="q"></h2>
+    <div id="target" aria-label="منطقة الإفلات">؟</div>
+    <div id="bank"></div>
+    <div id="msg" role="status" aria-live="polite"></div>
+    <button class="solid" id="next" hidden></button>
+  </section>
+</main>
+<script>
+(function(){
+  var LEVELS=[
+    {word:"الصدق",qs:[
+      {q:"ما سبب نجاح محمد في اختبار الملك؟",o:["الكرم","الأمانة","الصدق"],a:"الصدق"},
+      {q:"ما الخلق الحسن المستفاد من القصة؟",o:["الاحترام","الصدق","المساعدة"],a:"الصدق"}]},
+    {word:"التسامح",qs:[
+      {q:"ما النصيحة التي قالها الجد لنورة؟",o:["أن تسامحه","ألّا تتكلم معه","أن تبكي"],a:"أن تسامحه"},
+      {q:"ما الخلق الحسن المستفاد من القصة؟",o:["الكرم","التسامح","التعاون"],a:"التسامح"}]},
+    {word:"بر الوالدين",qs:[
+      {q:"ما الموقف الذي ظهر فيه خلق البر؟",o:["الموقف الأول","الموقف الثاني","الموقف الثالث"],a:"الموقف الأول"}]},
+    {word:"التواضع",qs:[
+      {q:"ما الصورة التي كان يجب عليه أن يتواضع فيها؟",o:["الصورة الأولى","الصورة الثانية","الصورة الثالثة"],a:"الصورة الثانية"}]}
+  ];
+  var $=function(i){return document.getElementById(i)};
+  var home=$("home"),quiz=$("quiz"),target=$("target"),bank=$("bank"),msg=$("msg"),next=$("next"),core=$("core");
+  var done=[false,false,false,false], lv=0, qi=0, locked=false;
+
+  function show(v){home.hidden=v!=="home";quiz.hidden=v!=="quiz";window.scrollTo(0,0)}
+
+  function renderHome(){
+    var n=0;
+    LEVELS.forEach(function(L,i){
+      var b=$("n"+(i+1)); if(done[i])n++;
+      var open=i===0||done[i-1];
+      b.disabled=!open&&!done[i];
+      b.className="node"+(done[i]?" done":"");
+      b.innerHTML=done[i]?L.word:'<span class="hid">؟؟؟</span>';
+      b.setAttribute("aria-label",done[i]?L.word:"كلمة محجوبة");
+    });
+    var all=n===4;
+    core.className=all?"full":"";
+    if(!all)core.textContent="؟";
+    $("prog").textContent="أنجزت "+n+" من 4";
+  }
+
+  LEVELS.forEach(function(L,i){$("n"+(i+1)).addEventListener("click",function(){startLevel(i)})});
+
+  core.addEventListener("click",function(){
+    if(core.classList.contains("full")){core.innerHTML="الأخلاق<br>الحسنة";burst(core)}
+  });
+
+  function startLevel(i){lv=i;qi=0;show("quiz");loadQ()}
+
+  function loadQ(){
+    var Q=LEVELS[lv].qs[qi]; locked=false;
+    $("q").textContent=Q.q;
+    $("count").textContent="السؤال "+(qi+1)+" من "+LEVELS[lv].qs.length;
+    target.className="";target.textContent="؟";
+    msg.textContent="";msg.className="";next.hidden=true;
+    bank.innerHTML="";
+    Q.o.forEach(function(w){
+      var c=document.createElement("div");
+      c.className="chip";c.textContent=w;c.dataset.word=w;c.tabIndex=0;
+      c.addEventListener("pointerdown",drag);
+      c.addEventListener("keydown",function(e){if(e.key==="Enter"||e.key===" "){e.preventDefault();check(w,c)}});
+      bank.appendChild(c);
+    });
+  }
+
+  function drag(e){
+    if(locked)return;
+    var chip=e.currentTarget,r=chip.getBoundingClientRect(),clone=chip.cloneNode(true);
+    clone.classList.add("drag");clone.style.width=r.width+"px";clone.style.height=r.height+"px";
+    document.body.appendChild(clone);chip.classList.add("ghost");
+    function inside(ev){var t=target.getBoundingClientRect();return Math.hypot(ev.clientX-(t.left+t.width/2),ev.clientY-(t.top+t.height/2))<=t.width/2}
+    function move(ev){clone.style.left=(ev.clientX-r.width/2)+"px";clone.style.top=(ev.clientY-r.height/2)+"px";target.classList.toggle("over",inside(ev))}
+    function end(ev){
+      document.removeEventListener("pointermove",move);document.removeEventListener("pointerup",end);document.removeEventListener("pointercancel",end);
+      clone.remove();target.classList.remove("over");
+      if(inside(ev))check(chip.dataset.word,chip);else chip.classList.remove("ghost");
+    }
+    move(e);document.addEventListener("pointermove",move);document.addEventListener("pointerup",end);document.addEventListener("pointercancel",end);
+    e.preventDefault();
+  }
+
+  function check(word,chip){
+    var Q=LEVELS[lv].qs[qi];
+    target.className="";void target.offsetWidth;
+    target.textContent=word;
+    if(word===Q.a){
+      locked=true;chip.classList.add("ghost");
+      target.classList.add("ok");msg.textContent="✔ إجابة صحيحة، أحسنت!";msg.className="ok";
+      burst(target);
+      var last=qi===LEVELS[lv].qs.length-1;
+      next.textContent=last?"العودة إلى الصفحة الرئيسية":"السؤال التالي";
+      next.hidden=false;next.focus();
+    }else{
+      target.classList.add("bad");msg.textContent="✘ إجابة خاطئة، حاول مرة أخرى";msg.className="bad";
+      chip.classList.remove("ghost");
+      setTimeout(function(){if(!locked){target.className="";target.textContent="؟"}},900);
+    }
+  }
+
+  next.addEventListener("click",function(){
+    if(qi<LEVELS[lv].qs.length-1){qi++;loadQ()}
+    else{done[lv]=true;renderHome();show("home")}
+  });
+  $("back").addEventListener("click",function(){renderHome();show("home")});
+
+  function burst(el){
+    var r=el.getBoundingClientRect(),cx=r.left+r.width/2,cy=r.top+r.height/2;
+    var cols=["#e2b44a","#4cd388","#5db4dd","#b894e0","#f0a352","#ff7a6b"];
+    for(var i=0;i<36;i++){
+      var s=document.createElement("span"),a=Math.random()*Math.PI*2,d=90+Math.random()*130;
+      s.className="bit";s.style.left=cx+"px";s.style.top=cy+"px";s.style.background=cols[i%cols.length];
+      s.style.setProperty("--x",Math.cos(a)*d+"px");s.style.setProperty("--y",Math.sin(a)*d+60+"px");
+      s.style.setProperty("--r",(Math.random()*720-360)+"deg");
+      document.body.appendChild(s);
+      (function(n){setTimeout(function(){n.remove()},1400)})(s);
+    }
+  }
+
+  renderHome();show("home");
+})();
+</script>
+</body>
+</html>
